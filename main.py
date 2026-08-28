@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Hourly Yad2 lookalike poller: detect new listings and notify Telegram."""
+"""Yad2 poller: detect new listings and notify Telegram."""
 
 from __future__ import annotations
 
@@ -13,8 +13,8 @@ from typing import Any
 import requests
 
 YAD2_URL = (
-    "https://gw.yad2.co.il/lookalike/vehicles/cars"
-    "?model=10222&price=-1-130000&year=2018-2024"
+    "https://gw.yad2.co.il/recommendations/items/vehicles"
+    "?count=20&type=home&categoryId=1&subCategoriesIds=21"
 )
 ITEM_URL = "https://www.yad2.co.il/vehicles/item/{token}"
 STATE_PATH = Path(__file__).resolve().parent / "sent_ads.json"
@@ -23,6 +23,7 @@ REQUEST_TIMEOUT = 30
 YAD2_HEADERS = {
     "Accept": "application/json, text/plain, */*",
     "Accept-Language": "he-IL,he;q=0.9,en-US;q=0.8,en;q=0.7",
+    "Cache-Control": "no-cache",
     "Connection": "keep-alive",
     "Origin": "https://www.yad2.co.il",
     "Referer": "https://www.yad2.co.il/",
